@@ -1,0 +1,90 @@
+#include <stdio.h>
+
+#define SIZE 10
+
+int hashTable[SIZE];
+
+// Function to initialize hash table
+void initialize()
+{
+    int i;
+    for(i = 0; i < SIZE; i++)
+    {
+        hashTable[i] = -1;
+    }
+}
+
+// Insert operation
+void insert()
+{
+    int key, index, i;
+
+    printf("Enter key value: ");
+    scanf("%d", &key);
+
+    index = key % SIZE;
+
+    for(i = 0; i < SIZE; i++)
+    {
+        int pos = (index + i) % SIZE;
+
+        if(hashTable[pos] == -1)
+        {
+            hashTable[pos] = key;
+            printf("Key inserted at index %d\n", pos);
+            return;
+        }
+    }
+
+    printf("Hash table is full\n");
+}
+
+// Display hash table
+void display()
+{
+    int i;
+
+    printf("\nHash Table:\n");
+
+    for(i = 0; i < SIZE; i++)
+    {
+        printf("Index %d : %d\n", i, hashTable[i]);
+    }
+}
+
+int main()
+{
+    int choice;
+
+    initialize();
+
+    while(1)
+    {
+        printf("\n--- Hashing Using Linear Probing ---\n");
+        printf("1. Insert\n");
+        printf("2. Display\n");
+        printf("3. Exit\n");
+
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch(choice)
+        {
+            case 1:
+                insert();
+                break;
+
+            case 2:
+                display();
+                break;
+
+            case 3:
+                return 0;
+
+            default:
+                printf("Invalid choice\n");
+        }
+    }
+
+    return 0;
+}
